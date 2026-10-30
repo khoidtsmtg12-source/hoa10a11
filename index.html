@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lab Nguyên Tử – 100 câu ôn tập</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#e9f0f7;--card:#fff;--ink:#0f2540;--mut:#53657d;--line:#cfdae6;--s1:#0a7ea4;--s2:#d1366f;--s3:#6d4af0;--ok:#12864a;--no:#d6343f;--sh:0 10px 30px #0f254018;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1727;--card:#122238;--ink:#e8f0fb;--mut:#9db0c9;--line:#243a57;--s1:#38c6f0;--s2:#ff7aa8;--s3:#a99bff;--ok:#4ee08e;--no:#ff7076;--sh:0 10px 30px #0007;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0a1727;--card:#122238;--ink:#e8f0fb;--mut:#9db0c9;--line:#243a57;--s1:#38c6f0;--s2:#ff7aa8;--s3:#a99bff;--ok:#4ee08e;--no:#ff7076;--sh:0 10px 30px #0007;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 "Be Vietnam Pro",system-ui,sans-serif;min-height:100vh}
+#app{max-width:720px;margin:0 auto;padding:16px 16px 48px}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;border:0}
+:focus-visible{outline:3px solid var(--s1);outline-offset:2px}
+h1{font-size:clamp(34px,9vw,52px);line-height:1.05;margin:8px 0;font-weight:800;letter-spacing:-.02em}
+.hero{display:flex;gap:18px;align-items:center;padding:18px 0 8px}
+.hero p{margin:0;color:var(--mut)}
+.atom{position:relative;width:84px;height:84px;flex:none}
+.atom i{position:absolute;inset:0;border:2.5px solid var(--s1);border-radius:50%;transform:rotate(var(--a)) scaleY(.38);animation:spin 5s linear infinite}
+.atom i:nth-child(1){--a:0deg}.atom i:nth-child(2){--a:60deg;border-color:var(--s2);animation-duration:7s}.atom i:nth-child(3){--a:120deg;border-color:var(--s3);animation-duration:9s}
+.atom b{position:absolute;left:50%;top:50%;width:16px;height:16px;margin:-8px;border-radius:50%;background:var(--ink)}
+@keyframes spin{to{transform:rotate(calc(var(--a) + 360deg)) scaleY(.38)}}
+.lbl{font-size:15px;color:var(--mut);margin:24px 0 8px;font-weight:600}
+.secs{display:grid;gap:10px}
+.sc{display:flex;gap:14px;align-items:center;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px;opacity:.55;transition:.2s}
+.sc.on{opacity:1;border-color:var(--c);box-shadow:var(--sh)}
+.sc b{display:block;font-size:17px}.sc small{display:block;color:var(--mut)}.sc em{font-style:normal;font-size:13px;color:var(--c);font-weight:600}
+.num{flex:none;width:48px;height:56px;border:2px solid var(--c);border-radius:8px;display:grid;place-items:center;font-size:26px;font-weight:800;color:var(--c)}
+.s1{--c:var(--s1)}.s2{--c:var(--s2)}.s3{--c:var(--s3)}
+.lvs{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:var(--card);border:2px solid var(--line);border-radius:99px;padding:8px 18px;font-weight:600}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.go,.btns button{background:var(--c,var(--ink));color:#fff;border-radius:14px;padding:14px 22px;font-weight:800;font-size:17px;transition:transform .15s}
+.go{width:100%;margin-top:26px;--c:var(--s1)}
+.go:disabled{opacity:.4}.go:active,.btns button:active{transform:scale(.97)}
+.note{color:var(--mut);font-size:14px;text-align:center}
+.top{display:flex;gap:10px;align-items:center;margin-bottom:14px;font-weight:600}
+.top button{background:var(--card);border:2px solid var(--line);border-radius:10px;padding:6px 10px}
+.bar{flex:1;height:10px;background:var(--line);border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--c,var(--s1));transition:width .5s;border-radius:9px}
+.card{position:relative;background:var(--card);border-radius:20px;border-top:6px solid var(--c);box-shadow:var(--sh);padding:20px;animation:in .45s ease}
+@keyframes in{from{opacity:0;transform:translateY(24px) rotate(-.6deg)}}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tags span{font-size:13px;font-weight:600;border-radius:8px;padding:3px 10px;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c)}
+.tags .lv.a{background:var(--ink);color:var(--bg)}
+.q{font-size:18px;margin:6px 0 14px}.q small,.tile small{color:var(--mut)}
+.vis{text-align:center;margin:8px 0 16px}
+.tile{display:inline-flex;flex-direction:column;align-items:center;border:2.5px solid var(--c);border-radius:12px;padding:10px 20px;margin:4px;background:color-mix(in srgb,var(--c) 7%,transparent)}
+.nt{display:inline-flex;align-items:center;font-weight:800;line-height:1}
+.nt i{display:flex;flex-direction:column;font-style:normal;font-size:.5em;text-align:right;margin-right:.14em;gap:.12em;font-weight:600;color:var(--c)}
+.nt u{text-decoration:none;font-size:.5em;align-self:flex-start;margin-left:.08em}
+.tile .nt{font-size:54px}.q .nt,.opt .nt{font-size:1.4em}
+input#ans{width:100%;padding:14px;font-size:18px;border:2px solid var(--line);border-radius:12px;background:var(--bg)}
+input#ans:focus{border-color:var(--c);outline:0}
+.opts{display:grid;gap:10px}.opts.tf{grid-template-columns:1fr 1fr}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:12px 14px;font-weight:600;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--c)}
+.tf .opt{justify-content:center;font-size:18px;padding:16px}
+.opt i{font-style:normal;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--line);flex:none;font-size:14px}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,transparent);animation:pop .5s}
+.opt.no{border-color:var(--no);background:color-mix(in srgb,var(--no) 16%,transparent);animation:shake .45s}
+.hintbox,.fb{margin-top:14px;border-radius:12px;padding:12px 14px;animation:in .3s}
+.hintbox{background:color-mix(in srgb,#f2b705 22%,transparent)}
+.fb.good{background:color-mix(in srgb,var(--ok) 16%,transparent)}.fb.bad{background:color-mix(in srgb,var(--no) 14%,transparent)}
+.fb p{margin:4px 0 0}.fb b{font-size:18px}
+.good b{color:var(--ok)}.bad b{color:var(--no)}
+.btns{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.btns .ghost,.ghost{background:var(--bg)!important;color:var(--ink)!important;border:2px solid var(--line)}
+.card.pop{animation:pop .5s}.card.shake,input.shake{animation:shake .45s}
+@keyframes pop{40%{transform:scale(1.025)}}
+@keyframes shake{20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
+.cf{position:absolute;left:50%;top:40%;pointer-events:none;font-size:20px;animation:fly .9s ease-out forwards;z-index:5}
+@keyframes fly{to{transform:translate(var(--x),var(--y)) rotate(var(--r));opacity:0}}
+.res h2{font-size:30px;margin:0}.big{font-size:56px;font-weight:800;line-height:1.1}.big small{font-size:16px;color:var(--mut);font-weight:400}
+.sblk{border-left:5px solid var(--c);padding:6px 12px;margin:12px 0}
+.sblk h3{margin:0 0 6px;font-size:16px;color:var(--c)}
+.br{display:flex;gap:10px;align-items:center;font-size:14px}.br span{width:70px}
+sup,sub{line-height:0}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+/* ===== Dữ liệu & công cụ ===== */
+const R=['','I','II','III','IV','V','VI','VII','VIII'];
+const EL=[[1,'H','Hiđro',1],[2,'He','Heli',4],[3,'Li','Liti',7],[4,'Be','Beri',9],[5,'B','Bo',11],[6,'C','Cacbon',12],[7,'N','Nitơ',14],[8,'O','Oxi',16],[9,'F','Flo',19],[10,'Ne','Neon',20],[11,'Na','Natri',23],[12,'Mg','Magie',24],[13,'Al','Nhôm',27],[14,'Si','Silic',28],[15,'P','Photpho',31],[16,'S','Lưu huỳnh',32],[17,'Cl','Clo',35],[18,'Ar','Agon',40],[19,'K','Kali',39],[20,'Ca','Canxi',40],[24,'Cr','Crom',52],[26,'Fe','Sắt',56],[29,'Cu','Đồng',63],[30,'Zn','Kẽm',65]].map(([Z,s,n,A])=>({Z,s,n,A}));
+const byZ=z=>EL.find(e=>e.Z==z),zOf=s=>EL.find(e=>e.s==s)||{Z:35,s:'Br',n:'Brom',A:80};
+const rnd=n=>Math.floor(Math.random()*n),pick=a=>a[rnd(a.length)];
+const shuf=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
+const deck=l=>{let d=[];return()=>{if(!d.length)d=shuf(l);return d.pop()}};
+const fm=v=>String(+(+v).toFixed(3)).replace('.',',');
+const nt=(A,Z,X,c)=>`<span class="nt"><i><span>${A}</span><span>${Z}</span></i>${X}${c?`<u>${c}</u>`:''}</span>`;
+const tile=h=>`<span class="tile">${h}</span>`;
+const chg=q=>q?(Math.abs(q)>1?Math.abs(q):'')+(q>0?'+':'−'):'';
+const sp=s=>s.replace(/([spd])(\d+)/g,'$1<sup>$2</sup>');
+/* cấu hình electron */
+const ORD=[[1,0,2],[2,0,2],[2,1,6],[3,0,2],[3,1,6],[4,0,2],[3,2,10],[4,1,6]];
+function cfg(Z){let r=Z,o=[];for(const[n,l,c]of ORD){if(r<=0)break;const k=Math.min(c,r);o.push([n,l,k]);r-=k}
+ if(Z==24)o=o.map(x=>x[0]==4&&x[1]==0?[4,0,1]:x[0]==3&&x[1]==2?[3,2,5]:x);
+ if(Z==29)o=o.map(x=>x[0]==4&&x[1]==0?[4,0,1]:x[0]==3&&x[1]==2?[3,2,10]:x);
+ return o}
+function ion(Z,q){if(q<0)return cfg(Z-q);const o=cfg(Z).map(x=>[...x]);let k=q;for(const x of[...o].sort((a,b)=>b[0]-a[0]||b[1]-a[1])){const t=Math.min(k,x[2]);x[2]-=t;k-=t}return o.filter(x=>x[2]>0)}
+const fmt=(o,sh)=>(sh?[...o].sort((a,b)=>a[0]-b[0]||a[1]-b[1]):o).map(([n,l,c])=>n+'spd'[l]+c).join(' ');
+const per=Z=>Math.max(...cfg(Z).map(x=>x[0]));
+const grp=Z=>Z==2?'VIIIA':({24:'VIB',26:'VIIIB',29:'IB',30:'IIB'})[Z]||R[cfg(Z).filter(x=>x[0]==per(Z)).reduce((a,x)=>a+x[2],0)]+'A';
+const out=Z=>Z==2?2:R.indexOf(grp(Z).replace('A',''));
+const kind=Z=>[2,10,18].includes(Z)?'Khí hiếm':[1,5,6,7,8,9,14,15,16,17].includes(Z)?'Phi kim':'Kim loại';
+const unp=Z=>cfg(Z).reduce((a,[n,l,c])=>{const cap=2*(2*l+1),h=cap/2;return a+(c<=h?c:cap-c)},0);
+const pe=Z=>cfg(Z).filter(x=>x[1]==1).reduce((a,x)=>a+x[2],0);
+/* kiểm tra đáp án */
+const num=(v,t=.011)=>{const f=s=>Math.abs(parseFloat(String(s).replace(',','.').replace(/[^\d.\-]/g,''))-v)<=t;f.n=1;return f};
+const sn=s=>s.toLowerCase().replace(/nhóm|\s|[.\-]/g,'');
+const str=(...v)=>s=>v.map(sn).includes(sn(s));
+const nc=s=>s.toLowerCase().replace(/[\s^\[\]{}_]/g,'').replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g,c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'.indexOf(c));
+const cf=o=>s=>[nc(fmt(o)),nc(fmt(o,1))].includes(nc(s));
+const wr=(r,c)=>[...new Set(c.map(String))].filter(x=>x!=String(r)&&!(+x<0)).slice(0,3);
+const mc=(q,r,c,hint,exp)=>{const o=shuf([String(r),...wr(r,c)]);return{type:'mcq',q,opts:o,ci:o.indexOf(String(r)),hint,exp}};
+const tf=(q,tr,hint,exp)=>({type:'tf',q,tr,ans:tr?'Đúng':'Sai',hint,exp});
+const mk=(g,n)=>Array.from({length:n},(_,i)=>g[i%g.length]());
+
+/* ===== PHẦN 1: kí hiệu nguyên tử ===== */
+const nx=deck(EL),nxa=deck(EL.filter(e=>e.Z>2));
+const IONS=[[26,3],[26,2],[29,2],[30,2],[13,3],[12,2],[20,2],[16,-2],[17,-1],[15,-3],[8,-2],[7,-3]],nxi=deck(IONS);
+const inf=e=>`P = E = Z = ${e.Z}; N = A − Z = ${e.A} − ${e.Z} = ${e.A-e.Z}.`;
+const TFS=deck([
+ [`${nt(12,6,'C')} và ${nt(14,6,'C')} là hai đồng vị của nhau.`,1,'Đồng vị: cùng Z, khác N (khác số khối).','Cùng Z = 6, khác số khối nên là đồng vị.'],
+ [`${nt(40,18,'Ar')} và ${nt(40,20,'Ca')} là hai đồng vị của nhau.`,0,'Đồng vị phải cùng số proton.','Z khác nhau (18 và 20) nên không phải đồng vị (chỉ trùng số khối).'],
+ [`Ion Fe<sup>3+</sup> (Z = 26) có 23 electron.`,1,'Fe mất 3 electron.','26 − 3 = 23 electron.'],
+ [`Nguyên tử ${nt(1,1,'H')} không có neutron.`,1,'N = A − Z.','N = 1 − 1 = 0.'],
+ [`Ion Cl<sup>−</sup> có số proton nhiều hơn số electron 1 hạt.`,0,'Anion nhận thêm electron.','Cl⁻ nhận 1 e nên electron nhiều hơn proton 1 hạt.'],
+ [`Số khối của nguyên tử chính là khối lượng tuyệt đối của nó tính bằng gam.`,0,'Số khối là một số nguyên, không có đơn vị.','A = p + n chỉ là số nguyên.']]);
+const S1b=[
+()=>{const e=nx(),w=pick(['P','N','E']),L={P:'số proton',N:'số neutron',E:'số electron'},v=w=='N'?e.A-e.Z:e.Z;return{type:'sym',q:`Quan sát kí hiệu nguyên tử và cho biết ${L[w]}.`,vis:tile(nt(e.A,e.Z,e.s)),ok:num(v,0),ans:v,hint:'Số ở dưới là Z (số hiệu) = số p = số e; số ở trên là A (số khối). N = A − Z.',exp:inf(e)}},
+()=>{const e=nx();return{type:'text',q:`Nguyên tử ${e.n} có số hiệu Z = ${e.Z} và số khối A = ${e.A}. Tính số neutron.`,ok:num(e.A-e.Z,0),ans:e.A-e.Z,hint:'A = Z + N, suy ra N = A − Z.',exp:inf(e)}},
+()=>{const e=nx();return mc(`Nguyên tử ${nt(e.A,e.Z,e.s)} có bao nhiêu electron?`,e.Z,[e.A,e.A-e.Z,e.Z+1,e.Z+2,e.Z+3],'Nguyên tử trung hoà: số e = số p = Z.',inf(e))},
+()=>{const e=nx(),N=e.A-e.Z,t=Math.random()<.5,s=t?N:N+pick([1,2,3]);return tf(`Nguyên tử ${nt(e.A,e.Z,e.s)} có ${s} neutron.`,t,'N = A − Z.',inf(e))},
+()=>{const e=nx();return{type:'text',q:`Một nguyên tử có ${e.Z} proton, ${e.A-e.Z} neutron và ${e.Z} electron. Tính số khối A.`,ok:num(e.A,0),ans:e.A,hint:'A = số p + số n (electron không tính vì khối lượng rất nhỏ).',exp:`A = ${e.Z} + ${e.A-e.Z} = ${e.A}.`}},
+()=>{const e=nx(),N=e.A-e.Z;return mc(`Nguyên tử có ${e.Z} p, ${N} n và ${e.Z} e có kí hiệu đúng là:`,nt(e.A,e.Z,e.s),[nt(e.Z,e.A,e.s),nt(N,e.Z,e.s),nt(e.A+1,e.Z,e.s),nt(e.A,e.Z+1,e.s),nt(e.A-1,e.Z,e.s)],'Viết A ở trên (A = p + n), Z ở dưới (Z = p).',inf(e))}];
+const S1a=[
+()=>{const e=nxa(),N=e.A-e.Z,S=2*e.Z+N,D=2*e.Z-N,w=pick(['Z','A']),v=w=='Z'?e.Z:e.A;return{type:'think',q:`Nguyên tử X có tổng số hạt (p, n, e) là ${S}, trong đó số hạt mang điện nhiều hơn số hạt không mang điện là ${D}. Tính ${w=='Z'?'số hiệu nguyên tử Z':'số khối A'} của X.`,ok:num(v,0),ans:v,hint:'Hạt mang điện là p và e (tổng 2Z), hạt không mang điện là n. S = 2Z + N, D = 2Z − N. Cộng hai vế: S + D = 4Z.',exp:`S + D = ${S+D} = 4Z ⇒ Z = ${e.Z}; S − D = ${S-D} = 2N ⇒ N = ${N}; A = ${e.A}. X là ${e.n}.`}},
+()=>{const[Z,q]=nxi(),e=byZ(Z),T=2*Z-q;return{type:'think',q:`Ion X<sup>${chg(q)}</sup> có tổng số hạt mang điện (p và e) là ${T}. Tính số proton của X.`,ok:num(Z,0),ans:Z,hint:'p = Z, còn e = Z − q (q mang dấu của điện tích). Vậy T = Z + (Z − q).',exp:`T = 2Z − q ⇒ Z = (T + q)/2 = (${T} ${q<0?'−':'+'} ${Math.abs(q)})/2 = ${Z}. X là ${e.n}.`}},
+()=>{const[Z,q]=nxi(),e=byZ(Z),N=e.A-Z,E=Z-q,r=Z+N+E;return mc(`Ion ${nt(e.A,Z,e.s,chg(q))} có tổng số hạt p, n, e là:`,r,[2*Z+N,r+1,r-1,r+2,r-2],'p = Z; n = A − Z; e = Z − q (cation mất e, anion nhận e).',`p = ${Z}, n = ${N}, e = ${E} ⇒ tổng ${r}.`)},
+()=>{const e=nxa(),N=e.A-e.Z,S=2*e.Z+N;return{type:'think',q:`Nguyên tử X có tổng số hạt p, n, e là ${S} và số khối A = ${e.A}. Tính số neutron của X.`,ok:num(N,0),ans:N,hint:'S = 2Z + N và A = Z + N. Lấy S − A sẽ ra Z.',exp:`S − A = Z = ${e.Z}; N = A − Z = ${N}. X là ${e.n}.`}},
+()=>{const[Z,q]=nxi(),e=byZ(Z),E=Z-q,w=pick(['e','t']),v=w=='e'?E:Z+E;return{type:'sym',q:`Quan sát kí hiệu ion và cho biết ${w=='e'?'số electron':'tổng số hạt mang điện (p + e)'} của ion.`,vis:tile(nt(e.A,Z,e.s,chg(q))),ok:num(v,0),ans:v,hint:'Điện tích ghi ở góc trên bên phải: ion dương mất e, ion âm nhận thêm e.',exp:`p = ${Z}; e = ${Z} ${q>0?'−':'+'} ${Math.abs(q)} = ${E}.`}},
+()=>{const[s,t,h,x]=TFS();return tf(s,!!t,h,x)}];
+const S1=[S1b,S1a];
+
+/* ===== PHẦN 2: nguyên tử khối trung bình ===== */
+const ISO={Cl:[[35,75],[37,25]],Cu:[[63,73],[65,27]],Br:[[79,50],[81,50]],B:[[10,20],[11,80]],Li:[[6,7.5],[7,92.5]],Mg:[[24,79],[25,10],[26,11]],Ne:[[20,90.5],[21,.3],[22,9.2]]};
+const av=s=>ISO[s].reduce((a,[m,p])=>a+m*p/100,0),avF=s=>fm(Math.round(av(s)*100)/100);
+const isoNt=s=>ISO[s].map(([m,p])=>`${nt(m,zOf(s).Z,s)} <small>(${fm(p)}%)</small>`).join('; ');
+const calc=s=>`Mtb = (${ISO[s].map(([m,p])=>m+'×'+fm(p)).join(' + ')})/100 = ${avF(s)}.`;
+const two=deck(['Cl','Cu','Br','B','Li']),thr=deck(['Mg','Ne']);
+const NT=s=>zOf(s).n;
+const S2b=[
+()=>{const s=two();return{type:'text',q:`Nguyên tố ${NT(s)} có các đồng vị: ${isoNt(s)}. Tính nguyên tử khối trung bình (làm tròn 2 chữ số thập phân).`,ok:num(av(s)),ans:avF(s),hint:'Mtb = (m₁·%₁ + m₂·%₂)/100. Nhớ chia cho 100 khi dùng phần trăm.',exp:calc(s)}},
+()=>{const s=two(),r=avF(s),v=av(s),I=ISO[s];return mc(`Nguyên tố ${NT(s)} có các đồng vị: ${isoNt(s)}. Nguyên tử khối trung bình là:`,r,[fm((I[0][0]+I[1][0])/2),fm(I[0][0]*I[1][1]/100+I[1][0]*I[0][1]/100),fm(v+.5),fm(v-.5),fm(v+1)],'Đây là trung bình có trọng số (theo phần trăm), không phải trung bình cộng.',calc(s))},
+()=>{const s=two(),t=Math.random()<.5,v=t?avF(s):fm(Math.round(av(s)*100)/100+pick([.5,1,-.5,1.5]));return tf(`Nguyên tố ${NT(s)} gồm ${isoNt(s)}. Nguyên tử khối trung bình của ${NT(s)} bằng ${v}.`,t,'Tính Mtb = Σ(m·%)/100 rồi so sánh.',calc(s))},
+()=>{const s=two(),z=zOf(s).Z;return{type:'sym',q:'Hai đồng vị của một nguyên tố được cho như hình (kèm % số nguyên tử). Tính nguyên tử khối trung bình, làm tròn 2 chữ số thập phân.',vis:ISO[s].map(([m,p])=>tile(nt(m,z,s)+`<small>${fm(p)}%</small>`)).join(''),ok:num(av(s)),ans:avF(s),hint:'Số trên là số khối m. Dùng Mtb = (m₁·%₁ + m₂·%₂)/100.',exp:calc(s)}},
+()=>{const s=two(),[[m1,p1],[m2,p2]]=ISO[s],z=zOf(s).Z;return{type:'text',q:`Nguyên tố ${NT(s)} có 2 đồng vị: ${nt(m1,z,s)} và ${nt(m2,z,s)}. Đồng vị ${m1} chiếm ${fm(p1)}% số nguyên tử. Tính % số nguyên tử của đồng vị ${m2}.`,ok:num(p2,.01),ans:fm(p2),hint:'Tổng phần trăm các đồng vị bằng 100%.',exp:`100 − ${fm(p1)} = ${fm(p2)}%.`}}];
+const CP=[['CuO',1,79.54,'63,54 + 16'],['Cu<sub>2</sub>O',2,143.08,'2×63,54 + 16'],['CuCl<sub>2</sub>',1,134.54,'63,54 + 2×35,5'],['CuSO<sub>4</sub>',1,159.54,'63,54 + 32 + 4×16']],cp=deck(CP);
+const STAT=deck([
+{type:'think',q:`Magie gồm 3 đồng vị ${nt(24,12,'Mg')} (79%), ${nt(25,12,'Mg')} và ${nt(26,12,'Mg')}. Nguyên tử khối trung bình của Mg là 24,32. Tính % số nguyên tử của ${nt(26,12,'Mg')}.`,ok:num(11,.05),ans:'11',hint:'Gọi x, y là % của ²⁵Mg và ²⁶Mg: x + y = 21 và 25x + 26y = 2432 − 24×79.',exp:'x + y = 21; 25x + 26y = 536 ⇒ y = 536 − 25×21 = 11%.'},
+{type:'think',q:`Clo có 2 đồng vị ³⁵Cl và ³⁷Cl. Có tối đa bao nhiêu loại phân tử Cl₂ khác nhau về khối lượng?`,ok:num(3,0),ans:'3',hint:'Chọn 2 nguyên tử từ 2 loại đồng vị; thứ tự không quan trọng.',exp:'³⁵Cl–³⁵Cl, ³⁵Cl–³⁷Cl, ³⁷Cl–³⁷Cl: 3 loại.'},
+{type:'think',q:'Hiđro có 2 đồng vị ¹H, ²H; clo có 2 đồng vị ³⁵Cl, ³⁷Cl. Có tối đa bao nhiêu loại phân tử HCl khác nhau?',ok:num(4,0),ans:'4',hint:'Mỗi phân tử gồm 1 nguyên tử H và 1 nguyên tử Cl: ghép từng cặp.',exp:'2 × 2 = 4 loại.'},
+{type:'think',q:'Hiđro có 2 đồng vị (¹H, ²H), oxi có 3 đồng vị (¹⁶O, ¹⁷O, ¹⁸O). Có tối đa bao nhiêu loại phân tử H₂O khác nhau?',ok:num(9,0),ans:'9',hint:'Hai nguyên tử H: chọn 2 trong 2 loại, không phân biệt thứ tự (3 cách: 1-1, 1-2, 2-2). Sau đó nhân số cách chọn O.',exp:'3 cách chọn cặp H × 3 cách chọn O = 9 loại.'},
+{type:'think',q:'Với các đồng vị ¹H, ²H và ¹⁶O, ¹⁷O, ¹⁸O, phân tử khối lớn nhất của H₂O là bao nhiêu?',ok:num(22,0),ans:'22',hint:'Chọn đồng vị nặng nhất cho mỗi nguyên tử.',exp:'2×2 + 18 = 22.'}]);
+const S2a=[
+()=>{const s=two(),[[m1],[m2,p2]]=ISO[s],z=zOf(s).Z;return{type:'think',q:`Nguyên tố X có 2 đồng vị ${nt(m1,z,'X')} và ${nt(m2,z,'X')}, nguyên tử khối trung bình của X là ${fm(av(s))}. Tính % số nguyên tử của đồng vị ${m2}.`,ok:num(p2,.06),ans:fm(p2),hint:'Gọi x là % đồng vị nặng: Mtb = m₁(100 − x)/100 + m₂·x/100. Giải phương trình bậc nhất.',exp:`x = (Mtb − m₁)/(m₂ − m₁)×100 = ${fm(p2)}%.`}},
+()=>{const s=two(),[[m1,p1],[m2]]=ISO[s],z=zOf(s).Z;return{type:'think',q:`Nguyên tố X có 2 đồng vị. Đồng vị thứ nhất có số khối ${m1}, chiếm ${fm(p1)}% số nguyên tử; nguyên tử khối trung bình của X là ${fm(av(s))}. Tìm số khối của đồng vị thứ hai.`,ok:num(m2,.05),ans:m2,hint:'Mtb = (m₁·%₁ + m₂·%₂)/100, trong đó %₂ = 100 − %₁. Tìm m₂.',exp:`m₂ = (100·Mtb − m₁·%₁)/%₂ = ${m2}.`}},
+()=>{const[f,k,M,d]=cp(),v=Math.round(k*65*.27/M*10000)/100;return{type:'think',q:`Đồng có 2 đồng vị ${nt(63,29,'Cu')} (73%) và ${nt(65,29,'Cu')} (27%). Tính % khối lượng của ${nt(65,29,'Cu')} trong ${f} (cho Cu = 63,54; O = 16; Cl = 35,5; S = 32). Làm tròn 2 chữ số thập phân.`,ok:num(v,.06),ans:fm(v),hint:'Tính M hợp chất bằng nguyên tử khối trung bình của Cu; khối lượng ⁶⁵Cu trong 1 mol hợp chất = (số nguyên tử Cu) × 65 × 27%.',exp:`M = ${d} = ${fm(M)}; %m = ${k}×65×0,27/${fm(M)} ≈ ${fm(v)}%.`}},
+()=>STAT(),
+()=>{const s=two(),[,[m2,p2]]=ISO[s],z=zOf(s).Z,N=pick([200,400,1000]);return{type:'think',q:`Nguyên tố ${NT(s)} có 2 đồng vị ${nt(ISO[s][0][0],z,s)} và ${nt(m2,z,s)}, nguyên tử khối trung bình là ${fm(av(s))}. Trong ${N} nguyên tử ${NT(s)} có bao nhiêu nguyên tử ${nt(m2,z,s)}?`,ok:num(N*p2/100,.5),ans:fm(N*p2/100),hint:'Bước 1: tìm % đồng vị nặng. Bước 2: nhân với tổng số nguyên tử.',exp:`% đồng vị ${m2} = ${fm(p2)}% ⇒ ${N} × ${fm(p2)}% = ${fm(N*p2/100)} nguyên tử.`}},
+()=>{const s=thr();return{type:'think',q:`Nguyên tố ${NT(s)} gồm 3 đồng vị: ${isoNt(s)}. Tính nguyên tử khối trung bình (làm tròn 2 chữ số thập phân).`,ok:num(av(s)),ans:avF(s),hint:'Mở rộng công thức cho 3 đồng vị: Mtb = (m₁%₁ + m₂%₂ + m₃%₃)/100.',exp:calc(s)}},
+()=>STAT(),
+()=>{const s=two(),[[m1],[m2]]=ISO[s],o=ISO[s][1][0];return mc(`Nguyên tố X có 2 đồng vị với số khối ${m1} và một đồng vị còn lại. Biết đồng vị ${m1} chiếm ${fm(ISO[s][0][1])}% và nguyên tử khối trung bình là ${fm(av(s))}. Số khối đồng vị còn lại là:`,m2,[m2+1,m2-1,m2+2,m1+1],'Mtb = (m₁·%₁ + m₂·%₂)/100 ⇒ tìm m₂.',`m₂ = (100·${fm(av(s))} − ${m1}×${fm(ISO[s][0][1])})/${fm(ISO[s][1][1])} = ${m2}.`)},
+()=>{const[f,k,M,d]=cp(),v=Math.round(k*65*.27/M*10000)/100;return{type:'think',q:`Cu gồm ${nt(63,29,'Cu')} (73%) và ${nt(65,29,'Cu')} (27%). Tính % khối lượng của ${nt(65,29,'Cu')} trong ${f} (Cu = 63,54; O = 16; Cl = 35,5; S = 32).`,ok:num(v,.06),ans:fm(v),hint:'%m = (k·65·27%)/M(hợp chất) × 100. Dùng Cu = 63,54 để tính M.',exp:`M = ${d} = ${fm(M)} ⇒ ≈ ${fm(v)}%.`}},
+()=>STAT(),
+()=>{const s=thr(),t=Math.random()<.5,v=t?avF(s):fm(Math.round(av(s)*100)/100+pick([.1,.2,-.1,-.2]));return tf(`Nguyên tố ${NT(s)} gồm 3 đồng vị: ${isoNt(s)}. Nguyên tử khối trung bình bằng ${v}.`,t,'Tính Σ(m·%)/100 rồi so với giá trị đề cho.',calc(s))},
+()=>STAT(),
+()=>STAT()];
+
+/* ===== PHẦN 3: vị trí trong bảng tuần hoàn ===== */
+const nb=deck(EL.filter(e=>![24,29].includes(e.Z))),nk=deck(EL.filter(e=>![1,5,24,29].includes(e.Z))),nm=deck(EL.filter(e=>![1,2,24,26,29,30].includes(e.Z)));
+const cx=e=>`${sp(fmt(cfg(e.Z)))} ⇒ ${per(e.Z)} lớp e ⇒ chu kì ${per(e.Z)}; nhóm ${grp(e.Z)}.`;
+const S3b=[
+()=>{const e=nb(),o=cfg(e.Z);return{type:'text',q:`Viết cấu hình electron của nguyên tử ${e.n} (Z = ${e.Z}).`,ok:cf(o),ans:sp(fmt(o)),hint:'Điền theo thứ tự mức năng lượng: 1s 2s 2p 3s 3p 4s 3d. Tối đa: s 2e, p 6e, d 10e. Viết dạng 1s2 2s2 2p6…',exp:`Cấu hình: ${sp(fmt(o))}.`}},
+()=>{const e=nb();return{type:'text',q:`Nguyên tố ${e.n} (Z = ${e.Z}) nằm ở chu kì mấy?`,ok:num(per(e.Z),0),ans:per(e.Z),hint:'Số chu kì bằng số lớp electron (lớp có n lớn nhất).',exp:cx(e)}},
+()=>{const e=nb();return{type:'text',q:`Nguyên tố ${e.n} (Z = ${e.Z}) thuộc nhóm nào? (ví dụ: IA, VIIA, VIIIA)`,ok:str(grp(e.Z)),ans:grp(e.Z),hint:'Với nguyên tố s, p: số electron lớp ngoài cùng bằng số thứ tự nhóm A. Với d: dựa vào 4s và 3d.',exp:cx(e)}},
+()=>{const e=nk();return mc(`${e.n} (Z = ${e.Z}) là nguyên tố nào trong các loại sau?`,kind(e.Z),['Kim loại','Phi kim','Khí hiếm'],'Số e lớp ngoài cùng: 1–3 thường là kim loại; 4–7 thường là phi kim; 8 là khí hiếm (He có 2 e).',cx(e)+` Đó là ${kind(e.Z).toLowerCase()}.`)},
+()=>{const e=nm(),k=out(e.Z),t=Math.random()<.5,s=t?k:k+pick([1,2]);return tf(`Nguyên tử ${e.n} (Z = ${e.Z}) có ${s} electron ở lớp ngoài cùng.`,t,'Viết cấu hình electron rồi đếm electron ở lớp có n lớn nhất.',cx(e)+` Lớp ngoài cùng có ${k} electron.`)},
+()=>{const e=nb(),o=cfg(e.Z),r=`${e.s} (${e.n})`,c=shuf(EL.filter(x=>x.Z!=e.Z)).slice(0,5).map(x=>`${x.s} (${x.n})`);return mc(`Cấu hình electron ${sp(fmt(o))} là của nguyên tử nguyên tố nào?`,r,c,'Đếm tổng số electron = Z.',`Tổng electron = ${e.Z} ⇒ ${e.n}.`)},
+()=>{const e=nb();return{type:'sym',q:'Dựa vào số hiệu nguyên tử Z trong kí hiệu, xác định nhóm của nguyên tố (ví dụ: IA, VIIA).',vis:tile(nt(e.A,e.Z,e.s)),ok:str(grp(e.Z)),ans:grp(e.Z),hint:'Z cho biết số electron: viết cấu hình rồi đếm electron lớp ngoài cùng.',exp:cx(e)}}];
+const IC=[[26,3],[26,2],[29,2],[29,1],[30,2],[24,3],[13,3],[12,2],[19,1],[20,2]],nic=deck(IC),NIA=deck([[16,-2],[17,-1],[15,-3],[8,-2],[7,-3],[9,-1]]);
+const UL=deck([24,26,29,7,8,15,16,6,13,17]),PL=deck([5,6,7,8,9,13,14,15,16,17]),CL=deck([3,4,5,6,7,8,11,12,13,14,15,16,19]);
+const NL={Ne:['Na<sup>+</sup>','Mg<sup>2+</sup>','Al<sup>3+</sup>','O<sup>2−</sup>','F<sup>−</sup>','N<sup>3−</sup>'],Ar:['K<sup>+</sup>','Ca<sup>2+</sup>','Cl<sup>−</sup>','S<sup>2−</sup>','P<sup>3−</sup>']};
+const K=[
+()=>{const[Z,q]=nic(),e=byZ(Z);return{type:'think',q:`Viết cấu hình electron của ion ${e.s}<sup>${chg(q)}</sup> (Z = ${Z}).`,ok:cf(ion(Z,q)),ans:sp(fmt(ion(Z,q))),hint:'Viết cấu hình nguyên tử trước (chú ý Cr, Cu). Cation mất electron ở lớp ngoài cùng trước: 4s mất trước 3d.',exp:`Nguyên tử: ${sp(fmt(cfg(Z)))} ⇒ ion: ${sp(fmt(ion(Z,q)))}.`}},
+()=>{const[Z,q]=NIA(),e=byZ(Z),o=ion(Z,q);return{type:'think',q:`Anion X<sup>${chg(q)}</sup> có cấu hình electron ${sp(fmt(o))}. Xác định kí hiệu hoá học của X.`,ok:str(e.s,e.n),ans:`${e.s} (${e.n})`,hint:'Anion nhận thêm |q| electron, nên Z = (số e của ion) − |q|.',exp:`Số e ion = ${Z-q}; Z = ${Z-q} − ${-q} = ${Z} ⇒ ${e.n}.`}},
+()=>{const Z=UL(),e=byZ(Z);return{type:'text',q:`Nguyên tử ${e.n} (Z = ${Z}) ở trạng thái cơ bản có bao nhiêu electron độc thân?`,ok:num(unp(Z),0),ans:unp(Z),hint:'Biểu diễn cấu hình bằng ô orbital: electron điền riêng từng ô trước khi ghép đôi (quy tắc Hund).',exp:`${sp(fmt(cfg(Z)))} ⇒ ${unp(Z)} electron độc thân.`}},
+()=>{const e=nm(),Z=e.Z;return{type:'think',q:`Nguyên tố X ở chu kì ${per(Z)}, nhóm ${grp(Z)}. Xác định kí hiệu hoá học của X.`,ok:str(e.s,e.n),ans:`${e.s} (${e.n})`,hint:'Chu kì = số lớp e; nhóm A = số e lớp ngoài cùng. Từ đó viết cấu hình và suy ra Z.',exp:`Cấu hình ${sp(fmt(cfg(Z)))} ⇒ Z = ${Z} ⇒ ${e.n}.`}},
+()=>{const Z=PL(),e=byZ(Z);return{type:'think',q:`Tổng số electron ở các phân lớp p của nguyên tử X là ${pe(Z)}. Xác định kí hiệu hoá học của X.`,ok:str(e.s,e.n),ans:`${e.s} (${e.n})`,hint:'Thử cấu hình các nguyên tố: nhớ 2p tối đa 6 e, 3p tối đa 6 e.',exp:`${sp(fmt(cfg(Z)))} ⇒ p có ${pe(Z)} e ⇒ ${e.n}.`}},
+()=>{const Z=CL(),e=byZ(Z);return{type:'think',q:`X và Y là hai nguyên tố cùng chu kì, thuộc hai nhóm A liên tiếp (ZX < ZY). Tổng số proton của X và Y là ${2*Z+1}. Xác định kí hiệu hoá học của X.`,ok:str(e.s,e.n),ans:`${e.s} (${e.n})`,hint:'Hai nguyên tố liền nhau trong cùng chu kì: ZY = ZX + 1, nên tổng = 2ZX + 1.',exp:`2ZX + 1 = ${2*Z+1} ⇒ ZX = ${Z} (${e.n}), ZY = ${Z+1}.`}},
+()=>{const[Z,q]=nic(),e=byZ(Z),t=Math.random()<.5,o=ion(Z,t?q:q-1);return tf(`Cấu hình electron của ion ${e.s}<sup>${chg(q)}</sup> là ${sp(fmt(o))}.`,t,'Viết cấu hình nguyên tử rồi bớt đúng số electron (4s trước 3d).',`Đúng là ${sp(fmt(ion(Z,q)))}.`)},
+()=>{const t=pick(['Ne','Ar']),o=t=='Ne'?'Ar':'Ne';return mc(`Ion nào sau đây có cấu hình electron giống khí hiếm ${t}?`,pick(NL[t]),shuf(NL[o]),`${t} có ${t=='Ne'?10:18} electron (${sp(fmt(cfg(t=='Ne'?10:18)))}). Đếm số electron của từng ion.`,`Ion đúng có ${t=='Ne'?10:18} electron như ${t}.`)}];
+const S3b21=S3b,S3a=[K[0],K[1],K[2],K[3],K[4],K[5],K[6],K[7],K[0],K[2],K[3],K[6]];
+
+/* ===== Tập 100 câu ===== */
+const tag=(a,sec,lv)=>a.map(q=>({...q,sec,lv}));
+const Q=[...tag(mk(S1b,22),'s1','b'),...tag(mk(S1a,12),'s1','a'),...tag(mk(S2b,20),'s2','b'),...tag(mk(S2a,13),'s2','a'),...tag(mk(S3b21,21),'s3','b'),...tag(mk(S3a,12),'s3','a')];
+
+/* ===== Âm thanh ===== */
+let AC,mute=false;
+function beep(seq){if(mute)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();let t=AC.currentTime;for(const[f,d,ty]of seq){const o=AC.createOscillator(),g=AC.createGain();o.type=ty||'sine';o.frequency.value=f;g.gain.setValueAtTime(.16,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d);t+=d*.8}}catch(e){}}
+const sOK=()=>beep([[660,.12],[880,.12],[1320,.25]]),sNO=()=>beep([[220,.18,'sawtooth'],[150,.32,'sawtooth']]),sWIN=()=>beep([[523,.15],[659,.15],[784,.15],[1047,.4]]),sTap=()=>beep([[520,.05]]);
+function burst(el){for(let k=0;k<18;k++){const s=document.createElement('span');s.className='cf';s.textContent=pick(['⚛','✦','●','★','✧']);s.style.cssText=`--x:${rnd(260)-130}px;--y:${-rnd(170)-30}px;--r:${rnd(360)}deg;color:var(--c)`;el.appendChild(s);setTimeout(()=>s.remove(),950)}}
+
+/* ===== Giao diện ===== */
+const SEC={s1:['Phần 1','Kí hiệu nguyên tử và đồng vị','Suy ra A, Z, P, N, E'],s2:['Phần 2','Nguyên tử khối trung bình','Đồng vị, phần trăm, hợp chất'],s3:['Phần 3','Vị trí trong bảng tuần hoàn','Cấu hình, chu kì, nhóm, loại nguyên tố']};
+const TY={text:'✍️ Trả lời ngắn',sym:'🔬 Nhìn kí hiệu',mcq:'🔘 Trắc nghiệm',think:'🧠 Tư duy',tf:'⚖️ Đúng / Sai'};
+const $=s=>document.querySelector(s),app=$('#app');
+const sel={s1:1,s2:1,s3:1};let lv='all',pool=[],i=0,score=0,streak=0,best=0,hint=false,done=false,wrong=[],log=[];
+const poolOf=()=>Q.filter(q=>sel[q.sec]&&(lv=='all'||q.lv==lv));
+const cnt=(s,l)=>Q.filter(q=>q.sec==s&&q.lv==l).length;
+function home(){
+ app.innerHTML=`<header class="hero"><div class="atom"><i></i><i></i><i></i><b></b></div><div><h1>Lab Nguyên Tử</h1><p>100 câu hỏi, 3 phần, 5 dạng bài, từ cơ bản đến siêu khó.</p></div></header>
+ <h2 class="lbl">Chọn phần</h2><div class="secs">${['s1','s2','s3'].map(s=>`<button class="sc ${s}" data-s="${s}"><span class="num">${s[1]}</span><span><b>${SEC[s][1]}</b><small>${SEC[s][2]}</small><em>${cnt(s,'b')} câu cơ bản, ${cnt(s,'a')} câu nâng cao</em></span></button>`).join('')}</div>
+ <h2 class="lbl">Chọn mức độ</h2><div class="lvs">${[['all','Tất cả'],['b','Cơ bản'],['a','Nâng cao (siêu khó)']].map(([k,t])=>`<button class="chip" data-lv="${k}">${t}</button>`).join('')}</div>
+ <button class="go" id="go"></button><p class="note">Câu hỏi được xáo trộn mỗi lần chơi. Dùng gợi ý sẽ chỉ được nửa điểm.</p>`;upd()}
+function upd(){const n=poolOf().length,g=$('#go');g.disabled=!n;g.textContent=n?`Bắt đầu · ${n} câu`:'Hãy chọn ít nhất 1 phần';document.querySelectorAll('.sc').forEach(b=>b.classList.toggle('on',!!sel[b.dataset.s]));document.querySelectorAll('.chip').forEach(b=>b.classList.toggle('on',b.dataset.lv==lv))}
+function start(l){pool=shuf(l||poolOf());i=0;score=0;streak=0;best=0;wrong=[];log=[];show()}
+function show(){
+ const q=pool[i];hint=false;done=false;
+ let body;
+ if(q.type=='mcq')body=`<div class="opts">${q.opts.map((o,k)=>`<button class="opt" data-k="${k}"><i>${'ABCD'[k]}</i><span>${o}</span></button>`).join('')}</div>`;
+ else if(q.type=='tf')body=`<div class="opts tf"><button class="opt" data-k="1">✔ Đúng</button><button class="opt" data-k="0">✘ Sai</button></div>`;
+ else body=`<input id="ans" autocomplete="off" autocapitalize="off" spellcheck="false" ${q.ok.n?'inputmode="decimal"':''} placeholder="Nhập đáp án…">`;
+ const choice=q.type=='mcq'||q.type=='tf';
+ app.innerHTML=`<div class="top ${q.sec}"><button data-a="home" aria-label="Về trang chủ">←</button><div class="bar"><i style="width:${i/pool.length*100}%"></i></div><span>${i+1}/${pool.length}</span><span id="sc">★ ${score}</span><span id="st">🔥 ${streak}</span><button data-a="mute" aria-label="Bật tắt âm thanh">${mute?'🔇':'🔊'}</button></div>
+ <article class="card ${q.sec}" id="card"><div class="tags"><span>${SEC[q.sec][0]}: ${SEC[q.sec][1]}</span><span class="lv ${q.lv}">${q.lv=='a'?'Nâng cao ⚡':'Cơ bản'}</span><span>${TY[q.type]}</span></div>
+ <p class="q">${q.q}</p>${q.vis?`<div class="vis">${q.vis}</div>`:''}${body}<div id="hb"></div><div id="fb"></div>
+ <div class="btns"><button class="ghost" data-a="hint">💡 Gợi ý</button><button id="main" data-a="main" ${choice?'hidden':''}>Kiểm tra</button></div></article>`;
+ const a=$('#ans');if(a)a.focus({preventScroll:true})}
+function submit(v){
+ if(done)return;const q=pool[i];let ok;
+ if(q.type=='mcq')ok=v==q.ci;else if(q.type=='tf')ok=(v==1)==q.tr;
+ else{if(!String(v).trim()){$('#ans').classList.add('shake');setTimeout(()=>$('#ans').classList.remove('shake'),450);return}ok=q.ok(v)}
+ done=true;const pts=ok?(hint?5:10):0;score+=pts;streak=ok?streak+1:0;best=Math.max(best,streak);log.push({sec:q.sec,lv:q.lv,ok});if(!ok)wrong.push(q);
+ const ans=q.type=='mcq'?`${'ABCD'[q.ci]}. ${q.opts[q.ci]}`:q.ans;
+ document.querySelectorAll('.opt').forEach(b=>{b.disabled=true;const k=b.dataset.k;if(q.type=='mcq'?k==q.ci:(k==1)==q.tr)b.classList.add('ok');else if(k==v)b.classList.add('no')});
+ $('#fb').innerHTML=`<div class="fb ${ok?'good':'bad'}"><b>${ok?'Chính xác! +'+pts+' điểm':'Chưa đúng'}</b>${ok?'':`<p>Đáp án: <b>${ans}</b></p>`}<p>${q.exp}</p></div>`;
+ const c=$('#card');c.classList.add(ok?'pop':'shake');if(ok){burst(c);sOK()}else sNO();
+ $('#sc').textContent='★ '+score;$('#st').textContent='🔥 '+streak;
+ const m=$('#main');m.hidden=false;m.textContent=i+1<pool.length?'Câu tiếp':'Xem kết quả';m.dataset.a='next';
+ const ai=$('#ans');if(ai)ai.disabled=true;m.focus({preventScroll:true})}
+function fin(){sWIN();const tot=pool.length,ok=log.filter(x=>x.ok).length,pc=Math.round(ok/tot*100);
+ const row=(l,f)=>{const a=log.filter(f);if(!a.length)return'';const c=a.filter(x=>x.ok).length;return`<div class="br"><span>${l}</span><div class="bar"><i style="width:${c/a.length*100}%"></i></div><b>${c}/${a.length}</b></div>`};
+ app.innerHTML=`<div class="card res s1" id="card"><h2>${pc>=90?'🏆 Xuất sắc!':pc>=70?'🎉 Khá tốt!':pc>=50?'💪 Cố lên!':'📚 Ôn thêm nhé!'}</h2><div class="big">${score}<small> / ${tot*10} điểm</small></div><p>Đúng ${ok}/${tot} câu (${pc}%). Chuỗi đúng dài nhất: ${best}.</p>
+ ${['s1','s2','s3'].map(s=>{const h=row('Cơ bản',x=>x.sec==s&&x.lv=='b')+row('Nâng cao',x=>x.sec==s&&x.lv=='a');return h?`<div class="sblk ${s}"><h3>${SEC[s][0]}: ${SEC[s][1]}</h3>${h}</div>`:''}).join('')}
+ <div class="btns">${wrong.length?`<button data-a="redo">Ôn ${wrong.length} câu sai</button>`:''}<button class="ghost" data-a="again">Chơi lại, xáo trộn</button><button class="ghost" data-a="home">Trang chủ</button></div></div>`;
+ setTimeout(()=>burst($('#card')),200)}
+app.onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return;const d=b.dataset;sTap();
+ if(d.s){sel[d.s]=!sel[d.s];upd()}
+ else if(d.lv){lv=d.lv;upd()}
+ else if(b.id=='go')start();
+ else if(d.k!==undefined)submit(d.k);
+ else if(d.a=='main')submit($('#ans').value);
+ else if(d.a=='next'){i++;i<pool.length?show():fin()}
+ else if(d.a=='hint'){if(done)return;hint=true;$('#hb').innerHTML=`<div class="hintbox">💡 ${pool[i].hint}</div>`}
+ else if(d.a=='home')home();
+ else if(d.a=='mute'){mute=!mute;b.textContent=mute?'🔇':'🔊'}
+ else if(d.a=='again')start(poolOf().length?undefined:Q);
+ else if(d.a=='redo')start(wrong)};
+document.addEventListener('keydown',e=>{if(e.key=='Enter'){const m=$('#main');if(m&&!m.hidden&&document.activeElement.tagName!='BUTTON'||document.activeElement.id=='ans')m&&m.click()}});
+home();
+</script>
+</body>
+</html>
